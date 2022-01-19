@@ -127,8 +127,8 @@ def partition(n: int):
         current_sets = next_sets
 
 
-def best_word(best_letters: List[str], candidates: Set[str]):
-    for index_set in partition(DEFAULT_WORD_LENGTH):
+def best_word(best_letters: List[str], candidates: Set[str], word_length):
+    for index_set in partition(word_length):
         # print(index_set)
         letters = [best_letters[i] for i in index_set]
         for permutation in permutations(letters):
@@ -152,9 +152,9 @@ def print_guess_result(word: str, letter_results: List[Guess]):
     return "".join(colour_letter(l, g.outcome) for l, g in zip(word, letter_results))
 
 
-def play_game(words, target, print_results=True):
+def play_game(words, target, word_length, guess_count, print_results=True):
 
-    game = WordleGame(target, DEFAULT_GUESSES)
+    game = WordleGame(target, guess_count)
     # print(f"target is: {game.target}")
 
     candidates = {word for word in words}
@@ -163,7 +163,7 @@ def play_game(words, target, print_results=True):
 
     while not game.is_finished():
         best_letters = find_best_letters(candidates)
-        next_guess = best_word(best_letters, candidates)
+        next_guess = best_word(best_letters, candidates, word_length)
 
         guess_results = game.guess(next_guess)
 
@@ -199,18 +199,18 @@ def play_game(words, target, print_results=True):
 
 
 def play_games():
-    words = get_words(DEFAULT_WORD_LENGTH)
+    word_length = DEFAULT_WORD_LENGTH
+    guess_count = DEFAULT_GUESSES
+
+    words = get_words(word_length)
 
     guesses_distrib = defaultdict(set)
     losses = []
 
-    # for word in words:
-    #     target = word
     for _ in range(100):
-        # target = words[i]
         target = random.choice(words)
 
-        win, guesses = play_game(words, target)
+        win, guesses = play_game(words, target, word_length, guess_count)
         print(f"{'WIN' if win else 'LOSE'}: {target} {[g[0] for g in guesses]}")
         if win:
             guesses_distrib[len(guesses)].add(target)

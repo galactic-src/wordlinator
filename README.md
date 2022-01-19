@@ -32,11 +32,16 @@ After each guess, this is whittled down a little more.
 - A misplaced letter must not be present at that location, but must be present somewhere.
 - An incorrect letter tells you exactly how many of that letter there are in the word. e.g. if you guessed `sassy` and 1 of the `s` were marked incorrect, there must be exactly 2 `s` in the target. Most often only 1 letter will have been guessed, in which case it will indicate that there are none of them in the target.
 
+## Performance and Variations
+
+The solver does pretty well, reaching the correct solution within 6 guesses ~90% of the time, and most often in 4 guesses (based on 100 randomly-selected words). It should do even better with fewer obscure words in the list.
+
+The solver does even better with 6 letter words (98/100 on first run) presumably because of the increased amount of information with each guess.
+And correspondingly, it does worse with 4 letter words (62/100, and 10 words not even guessed with 10 guesses).
+
 
 ## Improvements
-The solver does pretty well, reaching the correct solution within 6 guesses ~90% of the time, and most often in 4 guesses (based on 100 randomly-selected words).
-
-The solver usually struggles with words that differ by a single, less-common letter.
+The solver usually struggles with words that differ by a single, uncommon letter for which there are many possibilities.
 e.g. `bails`, `fails`, `hails`, `pails`, `vails`, it will exclude one letter at a time.
 
 For those cases, rather than always guessing a word that is possibly the secret, it would be better to select a valid word containing as many of the possibilities for the missing letter as possible (b, f, h, p, v).
