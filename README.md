@@ -9,8 +9,7 @@ Wordle is a 1-player game similar to the [mastermind](https://en.wikipedia.org/w
 
 Rules:
 - A secret five letter target word is selected.
-- The player submits a five letter word (must be a real word)
-- They are then informed, for each letter, whether it is:
+- Each turn, the player submits a five letter word (must be a real word). They are then informed, for each letter, whether it is:
   - Correct letter, correct location
   - Correct letter, incorrect location
   - Incorrect letter
