@@ -41,6 +41,9 @@ And correspondingly, it does worse with 4 letter words (62/100, and 10 words not
 
 
 ## Improvements
+
+### Maximise information from each guess
+
 The solver usually struggles with words that differ by a single, uncommon letter for which there are many possibilities.
 e.g. `bails`, `fails`, `hails`, `pails`, `vails`, it will exclude one letter at a time.
 
@@ -51,3 +54,11 @@ I suspect that actually points to a better strategy in general, to gather **maxi
 In that case you should **stop guessing letters that are already correct** (unless you want to check whether there are multiple of that letter) because the repeated "correct" result gives you no additional information.
 
 Instead, you could gather a list of possible "good" guess words, and see how much additional information each letter at that location stood to give you based on the possible results, then guess accordingly. It would make it a lot slower, though.
+
+### Better selection of letters
+
+The index-combination generator treats e.g. the difference between indices 2 and 3 as the same as the difference between indices 3 and 4.
+
+Really it should weight according to the number of words it satisfies, which would be more complicated to generate.
+
+However, a simpler improvement would be to prefer lower indices. So try {0, 1, 2, 6} before {0, 1, 3, 5} because 2 is always better than 3 or 5. I don't think this would be too awkward to build.
