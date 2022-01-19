@@ -206,7 +206,7 @@ def play_games():
 
     # for word in words:
     #     target = word
-    for _ in range(10):
+    for _ in range(100):
         # target = words[i]
         target = random.choice(words)
 
