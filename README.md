@@ -1,8 +1,7 @@
 # wordlinator
 Wordle solver (https://www.powerlanguage.co.uk/wordle/)
 
-The Word list (words.txt) was copied from https://github.com/dwyl/english-words which in turn got it from infochimps. It has some pretty obscure words and is not limited to 5 letter words.
-
+The Word list (words.txt, 15918 5-letter words, 370084 words in total) was copied from https://github.com/dwyl/english-words which in turn got it from infochimps. It has some pretty obscure words and is not limited to 5 letter words.
 
 ## What is Wordle
 Wordle is a 1-player game similar to the [mastermind](https://en.wikipedia.org/wiki/Mastermind_(board_game)) board game, but trying to discover a secret word rather than pattern.

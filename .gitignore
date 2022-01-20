@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Wordle words
+wordle_words1.txt
+wordle_words2.txt

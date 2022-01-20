@@ -13,9 +13,9 @@ DEFAULT_WORD_LENGTH = 5
 
 class PrintColour():
     GREEN = '\033[92m'
-    WARN = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
+    AMBER = '\033[93m'
+    RED = '\033[91m'
+    END = '\033[0m'
 
 
 class WordleGame:
@@ -139,11 +139,11 @@ def best_word(best_letters: List[str], candidates: Set[str], word_length):
 
 def colour_letter(letter: str, outcome: GuessOutcome):
     if outcome == GuessOutcome.INCORRECT:
-        return PrintColour.FAIL + letter + PrintColour.ENDC
+        return PrintColour.RED + letter + PrintColour.END
     elif outcome == GuessOutcome.MISPLACED:
-        return PrintColour.WARN + letter + PrintColour.ENDC
+        return PrintColour.AMBER + letter + PrintColour.END
     elif outcome == GuessOutcome.CORRECT:
-        return PrintColour.GREEN + letter + PrintColour.ENDC
+        return PrintColour.GREEN + letter + PrintColour.END
     else:
         raise Exception(f"unrecognised outcome {outcome}")
 
@@ -152,9 +152,10 @@ def print_guess_result(word: str, letter_results: List[Guess]):
     return "".join(colour_letter(l, g.outcome) for l, g in zip(word, letter_results))
 
 
-def play_game(words, target, word_length, guess_count, print_results=True):
+def play_game(words, target, guess_count, print_results=True):
 
     game = WordleGame(target, guess_count)
+    word_length = len(target)
     # print(f"target is: {game.target}")
 
     candidates = {word for word in words}
@@ -210,7 +211,7 @@ def play_games():
     for _ in range(100):
         target = random.choice(words)
 
-        win, guesses = play_game(words, target, word_length, guess_count)
+        win, guesses = play_game(words, target, guess_count, print_results=False)
         print(f"{'WIN' if win else 'LOSE'}: {target} {[g[0] for g in guesses]}")
         if win:
             guesses_distrib[len(guesses)].add(target)
